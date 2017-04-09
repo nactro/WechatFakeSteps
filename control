@@ -1,0 +1,9 @@
+Package: com.watcher.wechatfakesteps
+Name: WechatFakeSteps
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Fake your Wechat Foot-Steps!
+Maintainer: ChanYu
+Author: ChanYu
+Section: Tweaks
