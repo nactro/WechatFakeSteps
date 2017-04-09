@@ -7,7 +7,7 @@
 @implementation WechatSettingsRootListController
 
 static float headerHeight = 140.0f;
-#define VERSION_STRING	@"Alpha 0.1"
+#define VERSION_STRING	@"v1.0.0 - Restart Wechat app !"
 
 - (NSArray *)specifiers {
 	if (!_specifiers) {
@@ -39,6 +39,7 @@ static float headerHeight = 140.0f;
 	UIImage *icon = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/WechatSettings.bundle/icon.png"];
 	//init
 	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:icon];
+
 }
 /* over-write class method */
 -(id)tableView:(id)tableView viewForHeaderInSection:(NSInteger)section{
@@ -48,8 +49,9 @@ static float headerHeight = 140.0f;
 	if (!self.headerView) {
 		/* initlize headerView */
 		UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0,0,320,headerHeight)];
-		headerView.backgroundColor = BG_COLOR;
-		headerView.opaque = YES;
+		headerView.opaque = NO;
+		headerView.backgroundColor = UIColor.whiteColor;
+
 
 		CGRect frame = CGRectMake(15,47,headerView.bounds.size.width,50);
 		UILabel *tweakTitle = [[UILabel alloc] initWithFrame:frame];
@@ -66,6 +68,10 @@ static float headerHeight = 140.0f;
 		tweakSubtitle.textColor = VERSION_COLOR;
 		tweakSubtitle.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		[headerView addSubview:tweakSubtitle];
+		/*
+		修复BUG - 忘记实例化
+		*/
+		self.headerView = headerView;
 	}
 	return self.headerView;
 }
@@ -76,4 +82,30 @@ static float headerHeight = 140.0f;
 		return [super tableView:tableView heightForHeaderInSection:section];
 	}
 }
+
+//  void in Prefs---------------------------------------------------------------
+
+- (void)openTwitter {
+	NSURL *url;
+
+	if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot:"]]) {
+		url = [NSURL URLWithString:@"tweetbot:///user_profile/ryaneddisford"];
+	} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitterrific:"]]) {
+		url = [NSURL URLWithString:@"twitterrific:///profile?screen_name=ryaneddisford"];
+	} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetings:"]]) {
+		url = [NSURL URLWithString:@"tweetings:///user?screen_name=ryaneddisford"];
+	} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter:"]]) {
+		url = [NSURL URLWithString:@"twitter://user?screen_name=ryaneddisford"];
+	} else {
+		url = [NSURL URLWithString:@"https://twitter.com/ryaneddisford"];
+	}
+
+	[[UIApplication sharedApplication] openURL:url];
+}
+
+- (void)openDonate {
+	NSString *url = @"https://www.paypal.me/ECallan";
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
 @end
