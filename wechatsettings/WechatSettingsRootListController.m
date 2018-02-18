@@ -1,13 +1,31 @@
 #include "WechatSettingsRootListController.h"
+#import <Preferences/PSListController.h>
+#import <Preferences/PSSpecifier.h>
+#import <Preferences/PSSwitchTableCell.h>
+
+
+
 
 #define VERSION_COLOR		[UIColor colorWithRed:56/255.0 green:56/255.0 blue:58/255.0 alpha:1] // systemGrayColor
 #define TINT_COLOR		[UIColor colorWithRed:40/255.0 green:206/255.0 blue:81/255.0 alpha:1] // systemGreenColor
 #define BG_COLOR	 	[UIColor colorWithRed:23/255.0 green:23/255.0 blue:23/255.0 alpha:1.0] // black
 
+
+
+/* Settings Panel 
+*/
+@interface WechatSettingsRootListController : PSListController
+
+/* headerView */
+@property (nonatomic,strong) UIView *headerView;
+
+@end
+
 @implementation WechatSettingsRootListController
 
 static float headerHeight = 140.0f;
-#define VERSION_STRING	@"v1.0.0 - Restart Wechat app !"
+#define VERSION_STRING	@"v2.0.0 - Remember to respring !"
+
 
 - (NSArray *)specifiers {
 	if (!_specifiers) {
@@ -33,12 +51,12 @@ static float headerHeight = 140.0f;
 
 
 -(void)viewDidLoad {
-	[super viewDidLoad];
 
 	//use icon instead of title text
 	UIImage *icon = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/WechatSettings.bundle/icon.png"];
 	//init
 	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:icon];
+	[super viewDidLoad];
 
 }
 /* over-write class method */
@@ -84,7 +102,10 @@ static float headerHeight = 140.0f;
 }
 
 //  void in Prefs---------------------------------------------------------------
-
+- (void)kill
+{
+	system("killall -9 SpringBoard");
+}
 - (void)openTwitter {
 	NSURL *url;
 
@@ -109,3 +130,15 @@ static float headerHeight = 140.0f;
 }
 
 @end
+
+@interface PYButtonCell : PSTableCell
+@end
+
+@implementation PYButtonCell
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	[self.textLabel setTextColor:[UIColor grayColor]];
+}
+@end
+

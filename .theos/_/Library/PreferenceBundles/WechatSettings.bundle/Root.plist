@@ -38,6 +38,30 @@
 	 			<true/>
 	 		</dict>
 
+
+			<!-- [] KillWechat -->
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Features</string>
+			</dict>
+
+			<!-- Kill -->
+		<dict>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>cellClass</key>
+				<string>PYButtonCell</string>
+				<key>label</key>
+				<string>Respring</string>
+				<key>icon</key>
+				<string>kill.png</string>
+				<key>action</key>
+				<string>kill</string>
+			</dict>
+
+
 			<!-- [] Author -->
 			<dict>
 				<key>cell</key>
@@ -51,28 +75,21 @@
 				<key>cell</key>
 				<string>PSButtonCell</string>
 				<key>cellClass</key>
-				<string>CRSButtonCell</string>
+				<string>PYButtonCell</string>
 				<key>label</key>
-				<string>ChanYu @ryaneddisford</string>
+				<string>PoliChan @ryaneddisford</string>
 				<key>icon</key>
-				<string>avatar.png</string>
+				<string>twitter.png</string>
 				<key>action</key>
 				<string>openTwitter</string>
 			</dict>
 
 
-
-					<!-- [] Donation-->
-					 <dict>
-						<key>cell</key>
-						<string>PSGroupCell</string>
-						<key>label</key>
-						<string>DONATE</string>
-					</dict>
-
 					<dict>
 						<key>cell</key>
 						<string>PSButtonCell</string>
+				        <key>cellClass</key>
+				        <string>PYButtonCell</string>
 						<key>label</key>
 						<string>Donate via PayPal</string>
 						<key>icon</key>
@@ -81,6 +98,8 @@
 						<string>openDonate</string>
 					</dict>
 
+
+
 			<!-- [] FOOTER -->
 			<dict>
 				<key>cell</key>
@@ -88,7 +107,7 @@
 				<key>footerAlignment</key>
 				<string>1</string>
 				<key>footerText</key>
-				<string>CopyRight Uozi.Inc ©2017. For iOS 10 :)</string>
+				<string>CopyRight ©2018 PoliChan For iOS 10/11 :)</string>
 			</dict>
 	</array>
 	<key>title</key>
