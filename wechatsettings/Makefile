@@ -4,7 +4,9 @@ BUNDLE_NAME = WechatSettings
 WechatSettings_FILES = WechatSettingsRootListController.m
 WechatSettings_INSTALL_PATH = /Library/PreferenceBundles
 WechatSettings_FRAMEWORKS = UIKit
-WechatSettings_PRIVATE_FRAMEWORKS = Preferences
+WechatSettings_LDFLAGS += ./Preferences.tbd 
+export GO_EASY_ON_ME=1
+
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 

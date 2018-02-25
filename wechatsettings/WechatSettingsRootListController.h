@@ -1,5 +1,6 @@
 /* Settings Panel 
 */
+#import <Preferences/Preferences.h>
 @interface WechatSettingsRootListController : PSListController
 
 /* headerView */
