@@ -1,7 +1,5 @@
 # WechatFakeSteps
 
-<img src="https://img.shields.io/cran/l/devtools.svg" alt="License GPL"/>
-
 
 ## Introduction
 
@@ -11,9 +9,8 @@
 
 ## Installation
 
-### Bigboss Repo
-
 ```
+Bigboss Repo
 WechatFakeSteps
 ```
 
