@@ -8,8 +8,7 @@
 #include <spawn.h>
 #import <UIKit/UIKit.h>
 
-#define TINT_COLOR		[UIColor colorWithRed:40/255.0 green:206/255.0 blue:81/255.0 alpha:1] // systemGreenColor
-#define BG_COLOR	 	[UIColor colorWithRed:23/255.0 green:23/255.0 blue:23/255.0 alpha:1.0] // black
+#define TINT_COLOR		[UIColor colorWithRed:40/255.0 green:206/255.0 blue:81/255.0 alpha:1]
 #define HEADER_HEIGHT 120.0f
 #define kWidth  [UIScreen mainScreen].bounds.size.width
 
@@ -20,12 +19,15 @@
 @implementation WechatSettingsRootListController
 
 static float headerHeight = 140.0f;
-#define VERSION_STRING	@"v2.0.0 - Remember to respring !"
 
+-(void)save
+{
+    [self.view endEditing:YES];
+}
 
 - (NSArray *)specifiers {
 	if (!_specifiers) {
-		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
+		_specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
 	}
 
 	return _specifiers;
