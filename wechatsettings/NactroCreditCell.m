@@ -27,7 +27,7 @@
 #import "NactroCreditOption.h"
 #import "NactroCreditService.h"
 
-#define PREFERENCE_BUNDLE_PATH  @"/Library/PreferenceBundles/BlursKillerSettings.bundle"
+#define PREFERENCE_BUNDLE_PATH  @"/Library/PreferenceBundles/WechatSettings.bundle"
 #define BUTTON_HEIGHT   20
 #define BUTTON_SPACING  14
 
@@ -55,7 +55,7 @@
         UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
         [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:contentView];
-        
+
         [[contentView.leadingAnchor constraintEqualToAnchor:_avatarImageView.trailingAnchor constant:17] setActive:YES];
         [[contentView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor] setActive:YES];
         [[contentView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor] setActive:YES];

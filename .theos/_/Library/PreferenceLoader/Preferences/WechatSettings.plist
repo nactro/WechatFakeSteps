@@ -15,7 +15,7 @@
 		<key>isController</key>
 		<true/>
 		<key>label</key>
-		<string>WechatFakeSteps</string>
+		<string>微信步数修改助手</string>
 	</dict>
 </dict>
 </plist>

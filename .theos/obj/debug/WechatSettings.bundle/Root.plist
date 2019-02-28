@@ -15,29 +15,33 @@
 	 			<key>key</key>
 	 			<string>enabled</string>
 	 			<key>label</key>
-	 			<string>Enable Foot-Steps Hack</string> <!-- The text of your switch -->
+	 			<string>开启修改步数</string> <!-- The text of your switch -->
 				<key>PostNotification</key>
 				<string>com.watcher.wechatsettings/changed</string>
-				<key>icon</key>
-				<string>enabled.png</string>
 	 		</dict>
-	 		<dict>
-	 			<key>cell</key>
-	 			<string>PSSliderCell</string>
-	 			<key>default</key>
-	 			<integer>66666</integer> <!-- Default value of the slider -->
-	 			<key>defaults</key>
-	 			<string>com.watcher.wechatsettings</string> <!-- Your package name here -->
-	 			<key>key</key>
-	 			<string>key1slider</string> <!-- Your key name here -->
-	 			<key>max</key>
-	 			<real>99980</real> <!-- Enter your maximum value here -->
-	 			<key>min</key>
-	 			<real>10000</real> <!-- Enter your minimum value here -->
-	 			<key>showValue</key> <!-- Show the value of the slider. true or false. -->
-	 			<true/>
-	 		</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSEditTextCell</string>
+				<key>placeholder</key>
+				<string>谨慎使用，过高易封号</string>
+				<key>bestGuess</key>
+				<string>43000</string>
+				<key>defaults</key>
+				<string>com.watcher.wechatsettings</string>
+				<key>isDecimalPad</key>
+				<true/>
+				<key>key</key>
+				<string>footStepNumber</string>
+				<key>label</key>
+				<string>输入步数：</string>
+			</dict>
 
+			<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>功能按钮</string>
+			</dict>
 			<!-- Kill -->
 			<dict>
 			<key>action</key>
