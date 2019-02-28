@@ -4,7 +4,19 @@
 <dict>
 	<key>items</key>
 	<array>
+		<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>BlankCell</string>
+		</dict>
 
+		<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>功能开关</string>
+		</dict>
 		<dict>
 	 			<key>cell</key>
 	 			<string>PSSwitchCell</string>
@@ -35,15 +47,14 @@
 				<key>label</key>
 				<string>输入步数：</string>
 			</dict>
-
 			<dict>
-		<key>cell</key>
-		<string>PSButtonCell</string>
-		<key>label</key>
-		<string>保存步数</string>
-		<key>action</key>
-		<string>save</string>
-		</dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>保存步数</string>
+			<key>action</key>
+			<string>save</string>
+			</dict>
 
 
 			<dict>
@@ -61,6 +72,24 @@
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			</dict>
+
+
+			<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>支持</string>
+			</dict>
+
+			<dict>
+			<key>action</key>
+			<string>openDonate</string>
+			<key>label</key>
+			<string>赞助我们团队</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			</dict>
+
 
 			<dict>
 			<key>label</key>
@@ -111,21 +140,6 @@
 			<string>NactroCreditCell</string>
 			</dict>
 
-			<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>支持</string>
-			</dict>
-
-			<dict>
-			<key>action</key>
-			<string>openDonate</string>
-			<key>label</key>
-			<string>赞助我们团队</string>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			</dict>
 
 
 	</array>

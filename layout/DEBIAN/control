@@ -1,7 +1,7 @@
 Package: com.nactro.wechatfakesteps
 Name: 微信刷步数
 Depends: mobilesubstrate
-Version: 3.0
+Version: 3.1.0
 Architecture: iphoneos-arm
 Description: 更改微信步数，驰骋朋友圈。
 Maintainer: NactroTeam

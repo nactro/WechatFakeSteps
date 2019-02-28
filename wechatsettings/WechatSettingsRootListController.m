@@ -8,6 +8,7 @@
 #include <spawn.h>
 #import <UIKit/UIKit.h>
 
+static NSString *tweakName = @"微信步数修改助手 v3.1.0";
 #define TINT_COLOR		[UIColor colorWithRed:40/255.0 green:206/255.0 blue:81/255.0 alpha:1]
 #define HEADER_HEIGHT 120.0f
 #define kWidth  [UIScreen mainScreen].bounds.size.width
@@ -23,6 +24,15 @@ static float headerHeight = 140.0f;
 -(void)save
 {
     [self.view endEditing:YES];
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"操作提示：保存成功！" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+		[alert show];
+		[NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(dismissAlert:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:alert, @"alert", @"dismiss ", @"key" ,nil]  repeats:NO];
+}
+
+//alert 自动消失
+-(void) dismissAlert:(NSTimer *)timer{
+    UIAlertView *alert = [[timer userInfo]objectForKey:@"alert"];
+    [alert dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 - (NSArray *)specifiers {
@@ -105,7 +115,7 @@ static float headerHeight = 140.0f;
 #pragma mark - lazyload
 - (NactroHeaderView *)headerView{
 	if (!_headerView) {
-			_headerView = [[NactroHeaderView alloc]initWithFrame:CGRectMake(0,0,kWidth,HEADER_HEIGHT) tweakName:@"微信步数修改助手 v3.0" devTeamName:@"Nactro Dev." backgroundColor:TINT_COLOR];
+			_headerView = [[NactroHeaderView alloc]initWithFrame:CGRectMake(0,0,kWidth,HEADER_HEIGHT) tweakName:tweakName devTeamName:@"Nactro Dev." backgroundColor:TINT_COLOR];
 	}
 	return _headerView;
 }
