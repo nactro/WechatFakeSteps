@@ -38,77 +38,82 @@
 	 			<true/>
 	 		</dict>
 
-
-			<!-- [] KillWechat -->
-			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>label</key>
-				<string>Features</string>
-			</dict>
-
 			<!-- Kill -->
-		<dict>
-				<key>cell</key>
-				<string>PSButtonCell</string>
-				<key>cellClass</key>
-				<string>PYButtonCell</string>
-				<key>label</key>
-				<string>Respring</string>
-				<key>icon</key>
-				<string>kill.png</string>
-				<key>action</key>
-				<string>kill</string>
-			</dict>
-
-
-			<!-- [] Author -->
 			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>label</key>
-				<string>SUPPORT</string>
+			<key>action</key>
+			<string>killSpringBoard</string>
+			<key>label</key>
+			<string>注销设备</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
 			</dict>
 
-			<!-- Twitter -->
-		<dict>
-				<key>cell</key>
-				<string>PSButtonCell</string>
-				<key>cellClass</key>
-				<string>PYButtonCell</string>
-				<key>label</key>
-				<string>PoliChan @ryaneddisford</string>
-				<key>icon</key>
-				<string>twitter.png</string>
-				<key>action</key>
-				<string>openTwitter</string>
-			</dict>
-
-
-					<dict>
-						<key>cell</key>
-						<string>PSButtonCell</string>
-				        <key>cellClass</key>
-				        <string>PYButtonCell</string>
-						<key>label</key>
-						<string>Donate via PayPal</string>
-						<key>icon</key>
-						<string>paypal.png</string>
-						<key>action</key>
-						<string>openDonate</string>
-					</dict>
-
-
-
-			<!-- [] FOOTER -->
 			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>footerAlignment</key>
-				<string>1</string>
-				<key>footerText</key>
-				<string>CopyRight ©2018 PoliChan For iOS 10/11 :)</string>
+			<key>label</key>
+			<string>Credits</string>
+			<key>footerText</key>
+			<string>© Nectra Development 2019</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
 			</dict>
+
+			<dict>
+			<key>creditOptions</key>
+			<array>
+				<dict>
+					<key>service</key>
+					<string>website</string>
+					<key>username</key>
+					<string>https:/apt.nactro.com</string>
+				</dict>
+				<dict>
+					<key>service</key>
+					<string>weibo</string>
+					<key>username</key>
+					<string>5788815698</string>
+				</dict>
+				<dict>
+					<key>service</key>
+					<string>email</string>
+					<key>username</key>
+					<string>NactroDev@Gmail.com</string>
+				</dict>
+				<dict>
+					<key>service</key>
+					<string>github</string>
+					<key>username</key>
+					<string>nactro</string>
+				</dict>
+			</array>
+			<key>avatarImage</key>
+			<string>nactro.png</string>
+			<key>creditPosition</key>
+			<string>Development Group</string>
+			<key>creditName</key>
+			<string>Nactro.</string>
+			<key>height</key>
+			<integer>84</integer>
+			<key>cellClass</key>
+			<string>NactroCreditCell</string>
+			</dict>
+
+			<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>支持</string>
+			</dict>
+
+			<dict>
+			<key>action</key>
+			<string>openDonate</string>
+			<key>label</key>
+			<string>赞助我们团队</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			</dict>
+
+
 	</array>
 	<key>title</key>
 	<string>WechatSettings</string>

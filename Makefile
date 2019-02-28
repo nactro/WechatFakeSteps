@@ -1,21 +1,12 @@
-ARCHS = armv7 arm64
-
+ARCHS = arm64
+export GO_EASY_ON_ME=1
 include $(THEOS)/makefiles/common.mk
-
+export SDKVERSION= 12.1.2
 TWEAK_NAME = WechatFakeSteps
 WechatFakeSteps_FILES = Tweak.xm
-export GO_EASY_ON_ME=1
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
-after-all::
-	@echo Signing Binary
-	@ldid -S $(THEOS_OBJ_DIR)/$(TWEAK_NAME).dylib
-	@echo Copying to Distribution Folder
-	@mkdir -p $(THEOS_PROJECT_DIR)/Distribution/SBInject
-	@cp ./$(TWEAK_NAME).plist $(THEOS_PROJECT_DIR)/Distribution/SBInject
-	@cp $(THEOS_OBJ_DIR)/$(TWEAK_NAME).dylib $(THEOS_PROJECT_DIR)/Distribution/SBInject
-	@find $(THEOS_PROJECT_DIR)/Distribution/ -name ".DS_Store" -depth -exec rm {} \;
 after-install::
 	install.exec "killall -9 SpringBoard"
 SUBPROJECTS += wechatsettings

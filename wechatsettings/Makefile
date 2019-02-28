@@ -1,10 +1,11 @@
+ARCHS = arm64
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = WechatSettings
-WechatSettings_FILES = WechatSettingsRootListController.m
+WechatSettings_FILES = WechatSettingsRootListController.m NactroCreditOption.m NactroCreditService.m NactroCreditCell.m UIColor+Hex.m UIFont+Extension.m NactroHeaderView.m
 WechatSettings_INSTALL_PATH = /Library/PreferenceBundles
 WechatSettings_FRAMEWORKS = UIKit
-WechatSettings_LDFLAGS += ./Preferences.tbd 
+WechatSettings_PRIVATE_FRAMEWORKS = Preferences
 export GO_EASY_ON_ME=1
 
 

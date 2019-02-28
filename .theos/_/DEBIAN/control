@@ -1,11 +1,11 @@
-Package: com.watcher.wechatfakesteps
-Name: WechatFakeSteps
+Package: com.nactro.wechatfakesteps
+Name: 微信刷步数
 Depends: mobilesubstrate
 Architecture: iphoneos-arm
-Description: Fake your Wechat Foot-Steps!
-Maintainer: ChanYu
-Author: ChanYu
+Description: 更改微信步数，驰骋朋友圈。
+Maintainer: NactroTeam
+Author: NactroTeam
 Section: Tweaks
 Icon: file:///Library/PreferenceBundles/WechatSettings.bundle/icon.png
-Version: 1.0.0-10+debug
-Installed-Size: 336
+Version: 3.0-2+debug
+Installed-Size: 272

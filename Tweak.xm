@@ -2,31 +2,41 @@
 #import <Foundation/Foundation.h>
 
 #define PLIST_PATH @"/var/mobile/Library/Preferences/com.watcher.wechatsettings.plist"
+static BOOL enabled = NO;
+static int footStepNumber = 0;
 /* Get Boolean & int from plist */
-
-inline bool GetPrefBool(NSString *key) {
-	return [[[NSDictionary dictionaryWithContentsOfFile:PLIST_PATH] valueForKey:key] boolValue];
+static void loadPrefs() {
+  NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:PLIST_PATH];
+  if (prefs) {
+    enabled = ([[prefs objectForKey:@"enabled"] boolValue] ? [[prefs objectForKey:@"enabled"] boolValue] : enabled);
+    footStepNumber = ([[prefs objectForKey:@"footStepNumber"] floatValue] ?: footStepNumber);
+  }
+  [prefs release];
 }
 
-inline int GetPrefInt(NSString *key) {
-	return [[[NSDictionary dictionaryWithContentsOfFile:PLIST_PATH] valueForKey:key] intValue];
-}
 
 %hook WCDeviceStepObject
 -(unsigned int)m7StepCount {
-  if(GetPrefBool(@"enabled")) { // Your key name here
-    int newValue = GetPrefInt(@"key1slider"); // Your key name here
+  if(enabled) { // Your key name here
+    int newValue = footStepNumber; // Your key name here
     return newValue;
   } else {
     return %orig;
 }
 }
 -(unsigned int)hkStepCount{
-  if(GetPrefBool(@"enabled")) { // Your key name here
-    int newValue = GetPrefInt(@"key1slider"); // Your key name here
+  if(enabled) { // Your key name here
+    int newValue = footStepNumber; // Your key name here
     return newValue;
   } else {
     return %orig;
 }
 }
 %end
+
+
+%ctor {
+  loadPrefs();
+  CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("com.watcher.wechatsettings/changed"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+
+}

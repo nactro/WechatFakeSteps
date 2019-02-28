@@ -1,17 +1,21 @@
 #include "WechatSettingsRootListController.h"
-#import <Preferences/Preferences.h>
-#import <Preferences/PSSwitchTableCell.h>
+#import "NactroHeaderView.h"
+#import "NactroCreditService.h"
+#import "NactroCreditOption.h"
+#import "NactroCreditCell.h"
+#import "UIColor+Hex.h"
+#import "UIFont+Extension.h"
+#include <spawn.h>
+#import <UIKit/UIKit.h>
 
-
-
-
-#define VERSION_COLOR		[UIColor colorWithRed:56/255.0 green:56/255.0 blue:58/255.0 alpha:1] // systemGrayColor
 #define TINT_COLOR		[UIColor colorWithRed:40/255.0 green:206/255.0 blue:81/255.0 alpha:1] // systemGreenColor
 #define BG_COLOR	 	[UIColor colorWithRed:23/255.0 green:23/255.0 blue:23/255.0 alpha:1.0] // black
+#define HEADER_HEIGHT 120.0f
+#define kWidth  [UIScreen mainScreen].bounds.size.width
 
-
-
-
+@interface WechatSettingsRootListController()
+@property (nonatomic, strong)NactroHeaderView *headerView;
+@end
 
 @implementation WechatSettingsRootListController
 
@@ -52,39 +56,14 @@ static float headerHeight = 140.0f;
 
 }
 /* over-write class method */
--(id)tableView:(id)tableView viewForHeaderInSection:(NSInteger)section{
-	if(section !=0){
+- (id)tableView:(id)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section == 0){
+	  return self.headerView;
+	}else{
 		return [super tableView:tableView viewForHeaderInSection:section];
 	}
-	if (!self.headerView) {
-		/* initlize headerView */
-		UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0,0,320,headerHeight)];
-		headerView.opaque = NO;
-		headerView.backgroundColor = UIColor.whiteColor;
-
-
-		CGRect frame = CGRectMake(15,47,headerView.bounds.size.width,50);
-		UILabel *tweakTitle = [[UILabel alloc] initWithFrame:frame];
-		tweakTitle.text = @"FakeSteps";
-		tweakTitle.font = [UIFont systemFontOfSize:40 weight:UIFontWeightThin];
-		tweakTitle.textColor = UIColor.blackColor;
-		tweakTitle.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-		[headerView addSubview:tweakTitle];
-
-		CGRect subtitleFrame = CGRectMake(15, 94, headerView.bounds.size.width, 20);
-		UILabel *tweakSubtitle = [[UILabel alloc] initWithFrame:subtitleFrame];
-		tweakSubtitle.text = VERSION_STRING;
-		tweakSubtitle.font = [UIFont systemFontOfSize:14 weight:UIFontWeightThin];
-		tweakSubtitle.textColor = VERSION_COLOR;
-		tweakSubtitle.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-		[headerView addSubview:tweakSubtitle];
-		/*
-		修复BUG - 忘记实例化
-		*/
-		self.headerView = headerView;
-	}
-	return self.headerView;
 }
+
 - (CGFloat)tableView:(id)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
 		return headerHeight;
@@ -94,43 +73,39 @@ static float headerHeight = 140.0f;
 }
 
 //  void in Prefs---------------------------------------------------------------
-- (void)kill
-{
-	system("killall -9 SpringBoard");
-}
-- (void)openTwitter {
-	NSURL *url;
-
-	if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot:"]]) {
-		url = [NSURL URLWithString:@"tweetbot:///user_profile/ryaneddisford"];
-	} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitterrific:"]]) {
-		url = [NSURL URLWithString:@"twitterrific:///profile?screen_name=ryaneddisford"];
-	} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetings:"]]) {
-		url = [NSURL URLWithString:@"tweetings:///user?screen_name=ryaneddisford"];
-	} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter:"]]) {
-		url = [NSURL URLWithString:@"twitter://user?screen_name=ryaneddisford"];
-	} else {
-		url = [NSURL URLWithString:@"https://twitter.com/ryaneddisford"];
-	}
-
-	[[UIApplication sharedApplication] openURL:url];
-}
 
 - (void)openDonate {
-	NSString *url = @"https://www.paypal.me/ECallan";
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"alipayqr://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/tsx09384ad5mkh65g1irre0"]];
+}
+
+- (void)killSpringBoard{
+		pid_t pid;
+    const char* args[] = {"killall", "backboardd", NULL};
+    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
+}
+
+#pragma mark - setter & getter
+- (id)readPreferenceValue:(PSSpecifier*)specifier {
+	NSString *path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
+	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
+}
+
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
+	NSString *path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
+	[settings setObject:value forKey:specifier.properties[@"key"]];
+	[settings writeToFile:path atomically:YES];
+}
+
+#pragma mark - lazyload
+- (NactroHeaderView *)headerView{
+	if (!_headerView) {
+			_headerView = [[NactroHeaderView alloc]initWithFrame:CGRectMake(0,0,kWidth,HEADER_HEIGHT) tweakName:@"微信步数修改助手 v3.0" devTeamName:@"Nactro Dev." backgroundColor:TINT_COLOR];
+	}
+	return _headerView;
 }
 
 @end
-
-@interface PYButtonCell : PSTableCell
-@end
-
-@implementation PYButtonCell
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	
-	[self.textLabel setTextColor:[UIColor grayColor]];
-}
-@end
-
